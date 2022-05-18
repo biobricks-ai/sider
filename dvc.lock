@@ -1,0 +1,43 @@
+schema: '2.0'
+stages:
+  download_data:
+    cmd: Rscript R/download.R
+    deps:
+    - path: R/download.R
+      md5: 910ff0f0eea73db12c5cfa1857dc6c1f
+      size: 756
+    outs:
+    - path: cache/download/
+      md5: bbfce7a04b0851df97c227d64814d234.dir
+      size: 54387495
+      nfiles: 8
+  make_Column_Names:
+    cmd: Rscript R/Column_Names.R
+    deps:
+    - path: R/Column_Names.R
+      md5: 637e35ab69711484ea5c1de128a85a0c
+      size: 2770
+    - path: cache/download
+      md5: bbfce7a04b0851df97c227d64814d234.dir
+      size: 54387495
+      nfiles: 8
+    outs:
+    - path: cache/README
+      md5: 1f00665a62d768507c2f7025b1385606.dir
+      size: 5427
+      nfiles: 2
+  make_parquet:
+    cmd: Rscript R/build.R
+    deps:
+    - path: R/build.R
+      md5: f0fa11cf81a07dc2c54b6180e4f8d6f1
+      size: 909
+    - path: cache/
+      md5: 6df0e596644e0a1cc5a5c778caad90f4.dir
+      size: 54392922
+      nfiles: 10
+    outs:
+    - path: data/
+      md5: f8654ff7c57e284e2dca60ca307fb6c2.dir
+      size: 37128212
+      nfiles: 8
