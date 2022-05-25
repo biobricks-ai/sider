@@ -6,6 +6,7 @@ dependencies:
   - name: SIDER
     url: http://sideeffects.embl.de
 ---
+<a href="https://github.com/biobricks-ai/sider/actions"><img src="https://github.com/biobricks-ai/sider/actions/workflows/bricktools-check.yaml/badge.svg?branch=main"/></a>
 
 > SIDER contains information on marketed medicines and their recorded adverse drug reactions. The information is extracted from public documents and package inserts. The available information include side effect frequency, drug and side effect classifications as well as links to further information, for example drug–target relations.
 
