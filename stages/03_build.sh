@@ -8,21 +8,13 @@ rawpath=$localpath/raw
 
 mkdir "$localpath"/brick
 
-for file in "$localpath"/download/**;
+for file in "$rawpath"/**;
 do
-    (( fname ))
-    if [[ $file = *.gz ]]
-    then
-        fname=$(basename "$file" .tsv.gz)
-    elif [[ $file = *.tsv ]]
-    then
-        fname=$(basename "$file" .tsv)
-    fi
+    fname=$(basename "$file" .tsv)
     duckdb -c "copy (select * 
                 from read_csv('$file', 
                               delim='\t', 
-                              ignore_errors=true,
-                              header=false
+                              ignore_errors=true
                             )
                     ) 
                 to '$localpath/brick/$fname.parquet' (format parquet)"

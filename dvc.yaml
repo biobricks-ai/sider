@@ -5,10 +5,17 @@ stages:
     - stages/01_download.sh
     outs:
     - download
-  build:
-    cmd: stages/02_unzip.sh
+  process:
+    cmd: stages/02_process.sh
     deps:
-    - stages/02_unzip.sh
+    - stages/02_process.sh
+    - download
+    outs:
+    - raw
+  build:
+    cmd: stages/03_build.sh
+    deps:
+    - stages/03_build.sh
     - download
     outs:
     - brick
