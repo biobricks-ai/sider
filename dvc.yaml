@@ -1,21 +1,14 @@
 stages:
   download_data:
-    cmd: Rscript R/download.R
+    cmd: stages/01_download.sh
     deps:
-    - R/download.R
+    - stages/01_download.sh
     outs:
-    - cache/download/
-  make_Column_Names:
-    cmd: Rscript R/Column_Names.R
+    - download
+  build:
+    cmd: stages/02_unzip.sh
     deps:
-    - R/Column_Names.R
-    - cache/download
+    - stages/02_unzip.sh
+    - download
     outs:
-    - cache/README
-  make_parquet:
-    cmd: Rscript R/build.R
-    deps:
-    - R/build.R
-    - cache/
-    outs:
-    - data/
+    - brick
